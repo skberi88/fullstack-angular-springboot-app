@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>au.com.example</groupId>
+    <artifactId>angular_bootstrap_spring</artifactId>
+    <packaging>pom</packaging>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>Angular Bootstrap Spring</name>
+    <description>Angular 19 with Bootstrap 5 and Spring Boot 3</description>
+    <url>https://github.com/Rob-Leggett/angular_bootstrap_spring</url>
+
+    <modules>
+        <module>api</module>
+        <module>client</module>
+    </modules>
+
+    <properties>
+        <java.version>21</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <developers>
+        <developer>
+            <name>Robert Leggett</name>
+            <roles>
+                <role>Solution Architect</role>
+                <role>Technical Team Lead</role>
+                <role>Senior Developer</role>
+            </roles>
+            <url>https://robertleggett.com.au</url>
+        </developer>
+    </developers>
+
+</project>
