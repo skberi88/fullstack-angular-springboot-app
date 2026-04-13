@@ -29,32 +29,41 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<void> {
-    const credentials = btoa(`${email}:${password}`);
-    const headers = new HttpHeaders({
-      'Authorization': `Basic ${credentials}`,
-      'Content-Type': 'application/json'
-    });
+  const credentials = btoa(`${email}:${password}`);
 
-    return this.http.post(`${this.API_URL}/auth/login`, {}, { 
-      headers, 
-      observe: 'response',
-      responseType: 'text'
-    }).pipe(
-      tap((response: HttpResponse<string>) => {
-        const token = response.headers.get(this.TOKEN_KEY);
-        if (token) {
-          localStorage.setItem(this.TOKEN_KEY, token);
-          this.tokenSignal.set(token);
-        }
-      }),
-      tap(() => this.fetchCurrentUser().subscribe()),
-      map(() => undefined as void),
-      catchError(error => {
-        console.error('Login failed:', error);
-        throw error;
-      })
-    );
-  }
+  const headers = new HttpHeaders({
+    Authorization: `Basic ${credentials}`
+  });
+
+  return this.http.post(`${this.API_URL}/auth/login`, {}, {
+    headers,
+    observe: 'response'
+  }).pipe(
+    tap((response: HttpResponse<any>) => {
+      const token = response.headers.get(this.TOKEN_KEY);
+
+      console.log("LOGIN RESPONSE HEADERS:", response.headers);
+
+      if (token) {
+        console.log("TOKEN RECEIVED:", token);
+
+        localStorage.setItem(this.TOKEN_KEY, token);
+        this.tokenSignal.set(token);
+      } else {
+        console.error("❌ TOKEN NOT FOUND IN RESPONSE");
+      }
+    }),
+    tap(() => {
+      console.log("CALLING /user API...");
+      this.fetchCurrentUser().subscribe();
+    }),
+    map(() => undefined),
+    catchError(error => {
+      console.error('Login failed FULL ERROR:', error);
+      throw error;
+    })
+  );
+}
 
   logout(): void {
     localStorage.removeItem(this.TOKEN_KEY);
@@ -63,22 +72,23 @@ export class AuthService {
   }
 
   private fetchCurrentUser(): Observable<User | null> {
-    return this.http.get<User>(`${this.API_URL}/user`).pipe(
-      tap(user => this.currentUserSignal.set(user)),
-      catchError(() => {
-        this.logout();
-        return of(null);
-      })
-    );
-  }
+  return this.http.get<User>(`${this.API_URL}/user`, {
+    headers: this.getAuthHeaders()
+  }).pipe(
+    tap(user => this.currentUserSignal.set(user)),
+    catchError(() => {
+      this.logout();
+      return of(null);
+    })
+  );
+}
 
   getAuthHeaders(): HttpHeaders {
-    const token = this.tokenSignal();
-    if (token) {
-      return new HttpHeaders({ [this.TOKEN_KEY]: token });
-    }
-    return new HttpHeaders();
-  }
+  const token = this.tokenSignal();
+  return token
+    ? new HttpHeaders({ 'X-AUTH-TOKEN': token })
+    : new HttpHeaders();
+}
 
   getToken(): string | null {
     return this.tokenSignal();
