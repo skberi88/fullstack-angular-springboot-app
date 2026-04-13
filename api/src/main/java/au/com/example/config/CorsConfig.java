@@ -14,10 +14,11 @@ public class CorsConfig {
             public void addCorsMappings(CorsRegistry registry) {
 
                 registry.addMapping("/**")
-                        .allowedOrigins("*")
+                        .allowedOrigins("*")   // 🔥 IMPORTANT
                         .allowedMethods("*")
                         .allowedHeaders("*")
-                        .exposedHeaders("X-AUTH-TOKEN");
+                        .exposedHeaders("X-AUTH-TOKEN")
+                        .allowCredentials(false); // 🔥 IMPORTANT
             }
         };
     }
