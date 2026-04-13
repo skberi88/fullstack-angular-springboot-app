@@ -39,6 +39,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+            .cors(cors -> {}) // ✅ ENABLE CORS (CRITICAL)
             .csrf(csrf -> csrf.disable())
             .httpBasic(basic -> basic
                 .authenticationEntryPoint((request, response, authException) -> {
