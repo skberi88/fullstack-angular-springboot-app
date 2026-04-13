@@ -18,10 +18,7 @@ public class CorsConfig {
         config.setAllowCredentials(true);
 
         // 🔥 IMPORTANT: allow your frontend URL
-        config.setAllowedOrigins(List.of(
-                "http://localhost:4200",
-                "https://fullstack-angular-springboot-q1hcagkv4.vercel.app"
-        ));
+        config.setAllowedOriginPatterns(List.of("*"));
 
         config.setAllowedHeaders(List.of("*"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
