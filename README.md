@@ -1,16 +1,24 @@
 # 🚀 Full Stack Web Application (Angular + Spring Boot)
 
-A modern full-stack web application built using **Angular (Frontend)** and **Spring Boot (Backend)** with secure authentication and RESTful APIs.
+A **production-ready full-stack web application** built using **Angular** and **Spring Boot**, featuring secure authentication, RESTful APIs, and cloud deployment.
+
+---
+
+## 🌐 Live Demo
+
+🔗 **Frontend:** https://fullstack-angular-springboot-app.vercel.app
+🔗 **Backend API:** https://springboot-api-7a20.onrender.com/api
 
 ---
 
 ## 🔥 Features
 
-* 🔐 Secure authentication using token-based system
-* 📊 REST API with CRUD operations
-* ⚡ Responsive UI using Angular + Bootstrap
-* 🧠 Clean architecture (Controller → Service → Repository)
-* 🗄️ In-memory database (HSQLDB)
+* 🔐 **Token-based Authentication** (Spring Security)
+* 📊 **RESTful API** with full CRUD operations
+* ⚡ **Responsive UI** using Angular + Bootstrap
+* 🧠 **Clean Architecture** (Controller → Service → Repository)
+* 🌐 **Deployed on Cloud** (Vercel + Render)
+* 🗄️ **In-memory Database (HSQLDB)**
 
 ---
 
@@ -18,7 +26,7 @@ A modern full-stack web application built using **Angular (Frontend)** and **Spr
 
 ### Backend
 
-* Java 21 and above
+* Java 21
 * Spring Boot
 * Spring Security
 * JPA / Hibernate
@@ -30,42 +38,47 @@ A modern full-stack web application built using **Angular (Frontend)** and **Spr
 * TypeScript
 * Bootstrap
 
+### Deployment
+
+* Vercel (Frontend)
+* Render (Backend)
+
 ---
 
 ## 📂 Project Structure
 
 ```
-api/        → Spring Boot backend
-client/     → Angular frontend
+api/        → Spring Boot backend  
+client/     → Angular frontend  
 ```
 
 ---
 
-## ⚙️ Setup Instructions
+## ⚙️ Local Setup
 
 ### 1. Clone Repository
 
-```bash
+```
 git clone https://github.com/YOUR_USERNAME/REPO_NAME.git
 cd REPO_NAME
 ```
 
 ### 2. Build Project
 
-```bash
+```
 mvn clean package
 ```
 
 ### 3. Run Backend
 
-```bash
+```
 cd api
 mvn spring-boot:run
 ```
 
 ### 4. Run Frontend
 
-```bash
+```
 cd client
 npm install
 npm start
@@ -73,41 +86,40 @@ npm start
 
 ---
 
-## 🌐 Application URLs
-
-* Frontend → http://localhost:4200
-* Backend → http://localhost:8080/api
-
----
-
 ## 🔑 Default Login
 
-```
-Username: user@tester.com.au
-Password: password
-```
+* **Username:** [user@tester.com.au](mailto:user@tester.com.au)
+* **Password:** password
 
 ---
 
-## 📌 API Features
+## 📌 API Capabilities
 
 * User Authentication
 * Customer Management (CRUD)
-* Secure Endpoints
+* Secure Protected Endpoints
 
 ---
 
-## 💡 Future Improvements
+## 📸 Screenshots
+
+<img width="1894" height="867" alt="image" src="https://github.com/user-attachments/assets/4cd08660-ca94-44a6-8b7f-f3ea8ec967c4" />
+
+
+---
+
+## 🚀 Future Improvements
 
 * JWT Authentication
-* MySQL/PostgreSQL integration
-* Deployment (AWS / Render)
+* MySQL / PostgreSQL integration
 * Role-based access control
+* Docker + CI/CD pipeline
 
 ---
 
 ## 👨‍💻 Author
 
 **Sheetal Kumar Beri**
+B.Tech ECE | Backend Developer (Java + Spring Boot)
 
-* B.Tech ECE | Backend Developer (Java + Spring Boot)
+---
