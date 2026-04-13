@@ -37,28 +37,34 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-            .cors(cors -> {}) // ✅ ENABLE CORS (CRITICAL)
-            .csrf(csrf -> csrf.disable())
-            .httpBasic(basic -> basic
-                .authenticationEntryPoint((request, response, authException) -> {
-                    response.setStatus(401);
-                    response.setContentType("application/json");
-                    response.getWriter().write("{\"error\": \"Unauthorized\"}");
-                })
-            )
-            .authorizeHttpRequests(auth -> auth
-                .anyRequest().permitAll()
-            )
-            .sessionManagement(session -> session
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            )
-            .addFilterBefore(statelessAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-            .addFilterAfter(statelessTokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    http
+        .cors(cors -> {}) // ✅ enable cors
+        .csrf(csrf -> csrf.disable())
 
-        return http.build();
-    }
+        // 🔥 VERY IMPORTANT (ALLOW PREFLIGHT)
+        .authorizeHttpRequests(auth -> auth
+            .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
+            .anyRequest().permitAll()
+        )
+
+        .httpBasic(basic -> basic
+            .authenticationEntryPoint((request, response, authException) -> {
+                response.setStatus(401);
+                response.setContentType("application/json");
+                response.getWriter().write("{\"error\": \"Unauthorized\"}");
+            })
+        )
+
+        .sessionManagement(session -> session
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        )
+
+        .addFilterBefore(statelessAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+        .addFilterAfter(statelessTokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
+    return http.build();
+}
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
