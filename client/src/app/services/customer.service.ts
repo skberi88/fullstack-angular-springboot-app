@@ -7,7 +7,7 @@ import { Customer } from '../models/customer.model';
   providedIn: 'root'
 })
 export class CustomerService {
-  private readonly API_URL = '/api/customer';
+  private readonly API_URL = 'https://springboot-api-7a20.onrender.com/api/customer';
 
   constructor(private http: HttpClient) {}
 

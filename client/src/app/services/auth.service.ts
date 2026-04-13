@@ -7,7 +7,7 @@ import { User } from '../models/user.model';
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly API_URL = '/api';
+  private readonly API_URL = 'https://springboot-api-7a20.onrender.com/api';
   private readonly TOKEN_KEY = 'X-AUTH-TOKEN';
   
   private currentUserSignal = signal<User | null>(null);
